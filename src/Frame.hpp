@@ -1,7 +1,7 @@
 
 #pragma once
 
-#include <iostream>
+#include <array>
 #include <wx/wx.h>
 
 class Frame : public wxFrame
@@ -9,9 +9,10 @@ class Frame : public wxFrame
 public:
 	Frame();
 
-	void OnBtnPress(wxCommandEvent& evt);
+private:
+	void AddElement(wxCommandEvent& evt);
 
-	wxButton* btn;
-
-	wxDECLARE_EVENT_TABLE();
+private:
+	std::array<wxString, 2> availableModules = { "Flags", "Hashmap" };
+	std::vector<wxString> usedModules = {};
 };

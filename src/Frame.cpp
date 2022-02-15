@@ -1,16 +1,21 @@
 
 #include "Frame.hpp"
 
-wxBEGIN_EVENT_TABLE(Frame, wxFrame)
-				EVT_BUTTON(2001, Frame::OnBtnPress)
-wxEND_EVENT_TABLE()
-
 Frame::Frame() : wxFrame(nullptr, wxID_ANY, "CryGenUI")
 {
-	btn = new wxButton(this, 2001, "Click Me!");
+	wxBoxSizer* avModList = new wxBoxSizer(wxVERTICAL);
+
+	for (const wxString& elem : availableModules)
+	{
+		wxButton* btn = new wxButton(this, wxID_ANY, elem);
+		btn->Bind(wxEVT_BUTTON, &Frame::AddElement, this);
+		avModList->Add(btn, 1, wxEXPAND, 0);
+	}
+
+	SetSizerAndFit(avModList);
 }
 
-void Frame::OnBtnPress(wxCommandEvent &evt)
+void Frame::AddElement(wxCommandEvent &evt)
 {
-	std::cout << "Hello" << std::endl;
+
 }
